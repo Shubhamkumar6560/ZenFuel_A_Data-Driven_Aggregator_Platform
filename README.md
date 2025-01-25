@@ -1,4 +1,4 @@
-# Gym-Web-Application-
+# ZenFuel: A Data-Driven Aggregator Platform Enhancing Fitness Accessibility and Gym Management-
 A Gym Web Application is a comprehensive digital platform designed to enhance gym management and user engagement. It allows members to easily sign up, view membership plans, track their fitness progress, and book classes or gym equipment.
 
 The ZENFUEL web application is a groundbreaking platform that reimagines the relationship between fitness enthusiasts and gym owners, offering a digital solution to streamline and enhance the fitness journey. Unlike conventional gym apps that focus on limited functionalities, ZENFUEL operates as a versatile marketplace, connecting gym owners with users while maintaining high-quality standards. This distinction is achieved by ensuring that only gyms meeting specific criteria are approved, providing a reliable and premium experience for users.
