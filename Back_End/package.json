@@ -1,0 +1,29 @@
+{
+  "name": "zenfuel",
+  "version": "1.0.0",
+  "description": "gym application in mern ",
+  "main": "connection.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node connection.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Shubhamkumar6560/Gym-Web-Application-.git"
+  },
+  "author": "Shubham",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Shubhamkumar6560/Gym-Web-Application-/issues"
+  },
+  "homepage": "https://github.com/Shubhamkumar6560/Gym-Web-Application-#readme",
+  "dependencies": {
+    "axios": "^1.7.9",
+    "cors": "^2.8.5",
+    "dotenv": "^16.4.5",
+    "express": "^4.21.1",
+    "mongodb": "^6.10.0",
+    "mongoose": "^8.7.3",
+    "nodemon": "^3.1.9"
+  }
+}

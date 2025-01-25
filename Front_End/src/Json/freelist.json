@@ -1,0 +1,51 @@
+[
+    {
+        "id": 1,
+        "name":"Sleeping Guide",
+        "title":"Unlock the secrets to restful sleep with our comprehensive Sleeping Guide.",
+        "price":0,
+        "category":"Free",
+        "image":"https://img.freepik.com/free-vector/insomnia-concept-with-man_23-2148656268.jpg?t=st=1725735211~exp=1725738811~hmac=6313e64f0386cb6d34b2ebf23e1496c80a1b09c6d494bd44dd16247c38cafefa&w=740"
+    },
+    {
+        "id": 2,
+        "name":"Gym Magazines",
+        "title":"Discover the latest fitness tips, workout routines, and health insights with Gym Magazines.",
+        "price":0,
+        "category":"Free",
+        "image":"https://img.freepik.com/free-vector/fitness-advice-magazine_23-2147550292.jpg?t=st=1725184720~exp=1725188320~hmac=8e337ff1d789a48ac9eaeb96ec8d2e43f8a6e7c6de13628fe7c5941ebe2e6ec6&w=740"
+    },
+    {
+        "id": 3,
+        "name":"Gym Music Playlist",
+        "title":"Boost your workout with our energizing music playlist, designed to keep you motivated.",
+        "price":1,
+        "category":"Free",
+        "image":"https://img.freepik.com/free-vector/flat-design-album-cover-template_23-2150562226.jpg?t=st=1725354508~exp=1725358108~hmac=6a3995db0c6a9e3fb5537692c0f96fb3d731e882272beaee6740207406a9bd7b&w=740"
+    },
+    {
+        "id": 4,
+        "name":"Sleeping Guide",
+        "title":"Sleeping Guide",
+        "price":0,
+        "category":"Paid",
+        "image":"https://img.freepik.com/free-vector/little-boy-lying-bed-counting-sheep_74855-7582.jpg?t=st=1725183828~exp=1725187428~hmac=8b79fe33abe76586f57d125c72110d60a88cebd2372c39150ca392fafda20f81&w=740"
+    },
+    {
+        "id": 5,
+        "name":"Sleeping Guide",
+        "title":"Sleeping Guide",
+        "price":0,
+        "category":"Free",
+        "image":"https://img.freepik.com/free-vector/little-boy-lying-bed-counting-sheep_74855-7582.jpg?t=st=1725183828~exp=1725187428~hmac=8b79fe33abe76586f57d125c72110d60a88cebd2372c39150ca392fafda20f81&w=740"
+    },
+    {
+        "id": 6,
+        "name":"Sleeping Guide",
+        "title":"Sleeping Guide",
+        "price":0,
+        "category":"Free",
+        "image":"https://img.freepik.com/free-vector/little-boy-lying-bed-counting-sheep_74855-7582.jpg?t=st=1725183828~exp=1725187428~hmac=8b79fe33abe76586f57d125c72110d60a88cebd2372c39150ca392fafda20f81&w=740"
+    }
+
+]

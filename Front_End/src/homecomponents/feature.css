@@ -1,0 +1,15 @@
+.zoomi
+{
+    overflow:hidden;
+}
+.zoomi img 
+{
+    object-fit:content-box;
+    transition:0.5s;
+
+}
+.zoomi:hover img
+{
+    transform:scale(1.5);
+}
+
