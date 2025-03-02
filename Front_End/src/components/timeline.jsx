@@ -15,7 +15,7 @@ function timeline() {
        
        className='w-full md:w-1/2 mt-1 xl:mt-5 md:mx-3' >
        <div className="space-y-10">
-        <h1 className='md:text-4xl text-2xl font-bold  text-white my-4'> Welcome to ZenFit, Where Every{" "}
+        <h1 className='md:text-4xl text-2xl font-bold  text-white my-4'> Welcome to ZenFuel, Where Every{" "}
           Workout Brings You Closer to{" "}
           <span className='text-yellow-400 animate-pulse hover:text-sky-500'>Your Goals!!!</span></h1>
 
@@ -35,7 +35,7 @@ function timeline() {
 
           <button className="btn glass items-center text-white bg-black my-4">Subscribe Now</button>
            <p className='my-6 text-xl flex text-justify font-semibold text-white'>
-            Welcome to ZenFit, where your fitness journey begins! At our gym, we believe in empowering 
+            Welcome to ZenFuel, where your fitness journey begins! At our gym, we believe in empowering 
             individuals to reach their fullest potential, both physically and mentally.<br /><br />
             Whether you're a seasoned athlete or just starting out, we provide a supportive and
             motivating environment tailored to help you achieve your unique fitness goals.
