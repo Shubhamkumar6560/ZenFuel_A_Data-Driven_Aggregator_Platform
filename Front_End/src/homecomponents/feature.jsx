@@ -1,5 +1,7 @@
-import React from 'react'
+
 import Fee from '../assets/youngsport.jpg';
+import Routine from '../assets/imagehome.jpg';
+import Sport from '../assets/sports.jpg';
 import { fadeIn } from './variants';
 import { motion } from 'framer-motion';
 import { useState, useEffect } from 'react';
@@ -23,11 +25,16 @@ const parallex =()=>{
     };
     },[]);
 
-  const firstCardFull='At ZenFit, our gym classes are designed to suit all fitness levels, whether you’re a beginner or an advanced athlete We offer a variety of classes, including high-intensity interval training (HIIT), strength training, yoga, and Pilates. Each class focuses on improving strength, endurance, flexibility, and overall well-being. ';
+  const firstCardFull='At ZenFuel, our gym classes are designed to suit all fitness levels, whether you’re a beginner or an advanced athlete We offer a variety of classes, including high-intensity interval training (HIIT), strength training, yoga, and Pilates. Each class focuses on improving strength, endurance, flexibility, and overall well-being. ';
 
-  const firstCard='At ZenFit, our gym classes are designed to suit all fitness levels, whether you’re a beginner or an advanced athlete We offer a variety of classes...'; 
+  const firstCard='At ZenFuel, our gym classes are designed to suit all fitness levels, whether you’re a beginner or an advanced athlete We offer a variety of classes...'; 
 
-  const secondCard='';
+  const secondCardFull='Unleash your inner power with guided weight and resistance workouts designed to tone muscles, boost strength, and increase confidence. Ideal for all fitness levels.';
+  const secondCard='Unleash your inner power with guided weight and resistance workouts designed to tone muscles, boost strength, and increase confidence...';
+
+  const thirdCardFull='Energize your body and elevate your endurance with our high-intensity Cardio Training sessions. These classes combine treadmill drills, cycling, jump rope, and bodyweight movements to improve your cardiovascular health, burn fat, and boost stamina.';
+
+  const thirdCard='Energize your body and elevate your endurance with our high-intensity Cardio Training sessions. These classes combine...';
 
   return (
     <>
@@ -64,12 +71,15 @@ const parallex =()=>{
       </div>
     
       <div className='w-fit md:1/3 p-2 order-2 '>
-      <div className='rounded-2xl'>
-        <img src={Fee} alt=''/>
+      <div className='zoomi rounded-2xl'>
+        <img src={Routine} alt=''/>
         </div>
-        <h3 className='capitalize text-xl mx-auto my-3 ml-1 text-teal-200'>Fitness Classes to Fuel Your Journey</h3>
-        <h3 className='text-lg ml-1 text-white text-justify mx-auto my-3'>At ZenFit, our gym classes are designed to suit all fitness levels, whether you’re a beginner or an advanced athlete.
-           We offer a variety of classes, including high-intensity interval training (HIIT), strength training, yoga, and Pilates. Each class focuses on improving strength, endurance, flexibility, and overall well-being.</h3>
+        <h3 className='capitalize text-xl mx-auto my-3 ml-1 text-teal-200'>Find Your Perfect Class at ZenFuel</h3>
+        <h3 className='text-lg ml-1 text-white text-justify mx-auto my-3'>
+
+          {islarger ? secondCard : secondCardFull}
+
+        </h3>
            <a className='flex flex-row text-teal-300 cursor-pointer ml-1'>Read More<svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" fill="currentColor" class="bi bi-arrow-right" viewBox="0 0 16 16">
   <path fill-rule="evenodd" d="M1 8a.5.5 0 0 1 .5-.5h11.793l-3.147-3.146a.5.5 0 0 1 .708-.708l4 4a.5.5 0 0 1 0 .708l-4 4a.5.5 0 0 1-.708-.708L13.293 8.5H1.5A.5.5 0 0 1 1 8"/>
 </svg>
@@ -77,9 +87,21 @@ const parallex =()=>{
       </div>
 
       <div className='w-full md:1/3 p-2 order-3'>
-        <img src={Fee} alt='' className='rounded-2xl justify-evenly'></img>
-      </div>
+      <div className='zoomi rounded-2xl'>
+        <img src={Sport} alt=''/>
+        </div>
 
+ <h3 className='capitalize text-xl mx-auto my-3 ml-1 text-teal-200'>Cardio Training , Get Your Heart Pumping</h3>
+        <h3 className='text-lg ml-1 text-white text-justify mx-auto my-3'>
+
+          {islarger ? thirdCard : thirdCardFull}
+
+        </h3>
+           <a className='flex flex-row text-teal-300 cursor-pointer ml-1'>Read More<svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" fill="currentColor" class="bi bi-arrow-right" viewBox="0 0 16 16">
+  <path fill-rule="evenodd" d="M1 8a.5.5 0 0 1 .5-.5h11.793l-3.147-3.146a.5.5 0 0 1 .708-.708l4 4a.5.5 0 0 1 0 .708l-4 4a.5.5 0 0 1-.708-.708L13.293 8.5H1.5A.5.5 0 0 1 1 8"/>
+</svg>
+</a>
+</div>
       </div>
       <div className='flex justify-center mx-auto'>
       <button className=" flex justify-center px-16 my-3 py-4 bg-teal-700 text-white  hover:bg-teal-200 hover:text-black rounded-br-2xl rounded-tl-2xl">See More</button>

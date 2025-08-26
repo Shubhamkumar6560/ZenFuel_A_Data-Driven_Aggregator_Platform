@@ -1,7 +1,7 @@
 import React from 'react'
 import {motion} from 'framer-motion';
 import {fadeIn} from '../homecomponents/variants.js';
-import Img from '../assets/Zenn.png';
+import Img from '../assets/zenfuelimg.png';
 function framermotion() {
   return (
     <>

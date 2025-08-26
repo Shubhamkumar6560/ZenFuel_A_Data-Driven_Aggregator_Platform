@@ -5,6 +5,7 @@ import google from '../../src/assets/search.png'
 import { useState } from 'react';
 import axios from 'axios';
 import { toast } from 'react-toastify';
+import { useNavigate } from 'react-router-dom';
 
 function login({onClose}) {
 
@@ -14,6 +15,7 @@ function login({onClose}) {
   const[password,setconfirmPassword]=useState("");
   // const[errormessage,seterrormessage]=useState("");
 
+    const navigate = useNavigate();
 
   const toggleForm=()=>
   {
@@ -68,18 +70,20 @@ function login({onClose}) {
       {
         const login = {email:userEmail,password:userPassword}
         const res = await axios.post(`http://localhost:2001/login`,login)
-        console.log("response",res);
+        // console.log("response",res);
        
         if(res.status === 200)
         {
           toast.success(res.data.message,{position:'top-center',autoClose:2000,theme:"dark"})
+          navigate('/homepage');
         }
-        else
+        else if(res.status === 401)
         {
           toast.error(res.data.message,{position:'top-center',autoClose:2000,theme:"dark"});
         }
         setUserEmail("");
         setUserPassword("");
+
 
       }
       catch(error)
@@ -131,7 +135,7 @@ function login({onClose}) {
         <img 
           src={Pic}
           alt="Album"
-          className='h-[550px] w-full'
+          className='h-[594px] w-full'
         />
       </figure>
       </div>

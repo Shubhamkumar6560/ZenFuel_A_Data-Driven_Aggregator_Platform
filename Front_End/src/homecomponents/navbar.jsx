@@ -1,6 +1,8 @@
 import React, { useEffect,useState  } from 'react';
 
-function navbar() {
+
+import { Link } from 'react-router-dom';
+function navbar({userData}) {
   const [sticky,setSticky]=useState(false);
   const [isOpen, setIsOpen] = useState(false);
 
@@ -28,6 +30,9 @@ function navbar() {
 
 
 },)
+
+
+
   return (
     <>
     <div className={`max-w-screen-2xl container mx-auto fixed left-0 right-0 top-0 z-50${
@@ -55,10 +60,16 @@ function navbar() {
       <ul
         tabIndex={0}
         className="menu menu-sm dropdown-content bg-base-100 rounded-box z-[1] mt-3 w-52 p-2 shadow text-white">
-        <li><a href='/'>Login</a></li>
-        <li><a href='/homepage'>Homepage</a></li>
-        <li><a>Portfolio</a></li>
+          <Link to='/'>
+        <li><a>Login</a></li>
+        </Link>
+        <Link to='/homepage'>
+        <li><a >Homepage</a></li>
+        </Link>
+        <li><a href="">Portfolio</a></li>
+        <Link to='/about'>
         <li><a>About</a></li>
+        </Link>
       </ul>
     </div>
 
@@ -66,7 +77,6 @@ function navbar() {
   <div className="navbar-center">
     <a className="btn btn-ghost text-white md:text-black animate-bounce text-2xl" href="/homepage">ZenFuel</a>
   </div>
-
 
   <div className="navbar-end space-x-5">
 
@@ -107,26 +117,28 @@ function navbar() {
 </label>
 
     <div className="dropdown dropdown-end hover:dropdown-open ">
-      <div tabIndex={0} role="button" className="btn btn-ghost btn-circle avatar ">
-        <div className="w-10 rounded-full">
-          <img
-            alt="Tailwind CSS Navbar component"
-            src="https://img.daisyui.com/images/stock/photo-1534528741775-53994a69daeb.webp" />
-        </div>
-      </div>
+   <div tabIndex={0} role="button" className="btn btn-ghost btn-circle">
+  <div className="w-10 h-10 rounded-full bg-primary flex items-center justify-center text-white font-bold text-sm">
+    SK
+  </div>
+</div>
+
       <ul
         tabIndex={0}
         className="menu menu-sm dropdown-content bg-base-100 rounded-box z-[1] mt-3 w-52 p-2 shadow text-white">
         <li>
-          <a className="justify-between">
+          <Link className="justify-between" to='/profile'>
             Profile
             <span className="badge text-white">New</span>
-          </a>
+          </Link>
         </li>
         <li><a>Settings</a></li>
+        <Link to="/">
         <li><a>Logout</a></li>
+        </Link>
       </ul>
     </div>
+
   </div>
 </div>
 <nav className=" bg-zinc-700 md:bg-stone-950 md:bg-opacity-70 text-white">
@@ -137,14 +149,14 @@ function navbar() {
           </div>
           <div className="hidden md:block">
             <div className="flex space-x-4">
-              <a href="#" className="text-white hover:text-cyan-300 px-3 py-2 rounded-md text-sm font-medium">HOME</a>
-              <a href="#" className="text-white hover:text-cyan-300 px-3 py-2 rounded-md text-sm font-medium">ABOUT</a>
-              <a href="#" className="text-white hover:text-cyan-300 px-3 py-2 rounded-md text-sm font-medium">CLASSES</a>
-              <a href="#" className="text-white hover:text-cyan-300 px-3 py-2 rounded-md text-sm font-medium">PRICE</a>
-              <a href="#" className="text-white hover:text-cyan-300 px-3 py-2 rounded-md text-sm font-medium">TRAINERS</a>
-              <a href="#" className="text-white hover:text-cyan-300 px-3 py-2 rounded-md text-sm font-medium">LOCATIONS</a>
-              <a href="#" className="text-white hover:text-cyan-300 px-3 py-2 rounded-md text-sm font-medium">SCHEDULE</a>
-              <a href="#" className="text-white hover:text-cyan-300 px-3 py-2 rounded-md text-sm font-medium">CAREERS</a>
+              <Link to="/homepage" className="text-white hover:text-cyan-300 px-3 py-2 rounded-md text-sm font-medium">HOME</Link>
+              <Link to="/about" className="text-white hover:text-cyan-300 px-3 py-2 rounded-md text-sm font-medium">ABOUT</Link>
+              <Link to="/classes" className="text-white hover:text-cyan-300 px-3 py-2 rounded-md text-sm font-medium">CLASSES</Link>
+              <Link to="/prices" className="text-white hover:text-cyan-300 px-3 py-2 rounded-md text-sm font-medium">PRICE</Link>
+              <Link to="/book" className="text-white hover:text-cyan-300 px-3 py-2 rounded-md text-sm font-medium">TRAINERS</Link>
+              <Link to="/location" className="text-white hover:text-cyan-300 px-3 py-2 rounded-md text-sm font-medium">LOCATIONS</Link>
+              <Link to="/schedule" className="text-white hover:text-cyan-300 px-3 py-2 rounded-md text-sm font-medium">SCHEDULE</Link>
+              <Link to="/careers" className="text-white hover:text-cyan-300 px-3 py-2 rounded-md text-sm font-medium">CAREERS</Link>
             </div>
           </div>
           <span className='inline-flex justify-items-end md:hidden'>Welcome !! , Hello EveryOne</span>

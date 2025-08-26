@@ -1,5 +1,6 @@
 import React, { useEffect,useState  } from 'react';
 import Login from '../userAuthentication/login';
+import { Link } from 'react-router-dom';
 
 function navbar() {
 
@@ -56,7 +57,9 @@ function navbar() {
         <li><a>Login</a></li>
         <li><a href='/homepage'>Homepage</a></li>
         <li><a>Portfolio</a></li>
-        <li><a>About</a></li>
+        <Link to='/about'>
+                <li><a>About</a></li>
+                </Link>
       </ul>
     </div>
   </div>
