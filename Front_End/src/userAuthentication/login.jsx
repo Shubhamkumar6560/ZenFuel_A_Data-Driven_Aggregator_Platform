@@ -1,5 +1,6 @@
 import React from 'react'
 import { X } from 'lucide-react';
+import { Eye , EyeOff } from 'lucide-react';
 import Pic from '../assets/pretty.jpg'
 import google from '../../src/assets/search.png'
 import { useState } from 'react';
@@ -13,7 +14,10 @@ function login({onClose}) {
   const[userEmail,setUserEmail]=useState("");
   const[userPassword,setUserPassword]=useState("");
   const[password,setconfirmPassword]=useState("");
-  // const[errormessage,seterrormessage]=useState("");
+
+
+  const[showpassword,setshowpassword]=useState(false);
+  const[showcpassword,setshowcpassword]=useState(false);
 
     const navigate = useNavigate();
 
@@ -44,7 +48,7 @@ function login({onClose}) {
       toast.error("Password is required !!",{position:"top-center",autoClose:4000,theme:"dark"});
       return false;
     }
-    else if(!/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[!@#$%&]).{8,}$/.test(userPassword))
+    else if(!/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[!@#$%&]).{8,}$/.test(userPassword,password))
     {
       toast.warn("Password must be at least 8 characters long, include one uppercase letter, one lowercase letter, one number, and one special character."
         ,{position:"top-center",autoClose:4000,theme:"dark"});
@@ -69,27 +73,27 @@ function login({onClose}) {
       try
       {
         const login = {email:userEmail,password:userPassword}
-        const res = await axios.post(`http://localhost:2001/login`,login)
-        // console.log("response",res);
+        const response = await axios.post(`http://localhost:2001/auth/login`,login)
+        console.log("response",response);
        
-        if(res.status === 200)
+        if(response.status == 200)
         {
-          toast.success(res.data.message,{position:'top-center',autoClose:2000,theme:"dark"})
+          toast.success(response.data.message,{position:'top-center',autoClose:2000,theme:"dark"})
           navigate('/homepage');
         }
-        else if(res.status === 401)
-        {
-          toast.error(res.data.message,{position:'top-center',autoClose:2000,theme:"dark"});
-        }
-        setUserEmail("");
-        setUserPassword("");
-
 
       }
       catch(error)
       {
-        console.error("Error",error);
-        toast.error(res.data.message,{position:'top-center',autoClose:2000,theme:"dark"});
+        if(error.response.status == 400)
+        {
+          toast.error(error.response.data.message,{position:'top-center',autoClose:2000,theme:"dark"})
+        }
+        else{
+          toast.error(error.response.data.message,{position:'top-center',autoClose:2000,theme:"dark"});
+        }
+        setUserEmail("");
+        setUserPassword("");
       }
     }
     else
@@ -104,23 +108,26 @@ function login({onClose}) {
       console.log("email",userEmail);
       console.log("password",userPassword);
       
-      const res= await axios.post(`http://localhost:2001/register`,formDataRegister)
-      
-      // console.log("response",res);
-      if(res.status === 200)
+      const res= await axios.post(`http://localhost:2001/auth/register`,formDataRegister)
+ 
+      if(res.status == 200)
       {
-        toast.success("Registration Successfull !",{position:'top-center',autoClose:2000,theme:"dark"});
+        toast.success(res.data.message,{position:'top-center',autoClose:2000,theme:"dark"});
         setUserEmail("");
         setUserPassword("");
         setconfirmPassword("");
+        onClose();
       }     
-      else
-      {
-        toast.error("Registration Failed !",{position:'top-center',autoClose:2000,theme:"dark'"});
-      }
 
     } catch (error) {
-        console.log(error.message);   
+        if(error.response && error.response.status == 400)
+          {
+            toast.warning(error.response.data.message,{position:'top-center',autoClose:2000,theme:"dark"});
+          } 
+          else
+          {
+            toast.error("Something Went , Wrong !!",{position:'top-center',autoClose:2000,theme:"dark"});
+          }
     }
   }
   };
@@ -162,7 +169,7 @@ function login({onClose}) {
       d="M15 6.954 8.978 9.86a2.25 2.25 0 0 1-1.956 0L1 6.954V11.5A1.5 1.5 0 0 0 2.5 13h11a1.5 1.5 0 0 0 1.5-1.5V6.954Z" />
   </svg>
   <input onChange={(e) => setUserEmail(e.target.value)}
-  type="text" className="flex-grow bg-white outline-none" placeholder="Email" required/>
+  type="text" value={userEmail} className="flex-grow bg-white outline-none" placeholder="Email" required/>
 </label>
 
 
@@ -178,7 +185,11 @@ function login({onClose}) {
       clipRule="evenodd" />
   </svg>
   <input value={userPassword} onChange={(e) => setUserPassword(e.target.value)} 
-  type="password" className="flex-grow  bg-white outline-none" placeholder="Password" required/>
+  type= "password" className="flex-grow  bg-white outline-none" placeholder="Password" required/>
+{/* <button
+type='button' onClick={()=>setshowpassword(!showpassword)}>
+  {showpassword ? <EyeOff/>:<Eye/>}
+</button> */}
 </label>
 
 {!isLogin && (
@@ -195,7 +206,13 @@ function login({onClose}) {
       clipRule="evenodd" />
   </svg>
   <input value={password} onChange={(e)=>setconfirmPassword(e.target.value)} 
-  type="password" className="flex-grow  bg-white outline-none" placeholder="Confirm Password" required />
+  type={showcpassword ? "text" : "password"} className="flex-grow  bg-white outline-none" placeholder="Confirm Password" required />
+  <button
+  type='button'
+  onClick={()=>setshowcpassword(!showcpassword)} >
+
+{showcpassword ? <EyeOff/>:<Eye/>}
+  </button>
 </label>
 )}
 {/* {errormessage && <span className='text-red-500 text-sm'>{errormessage}</span>} */}

@@ -4,9 +4,7 @@ async function dbConnect() {
   try {
     const client = await MongoClient.connect('mongodb://localhost:27017/');
     const db = client.db('ZenFuel');
-    const userCollection = await db.collection('Registration');
-    
-    console.log("Mongo Connnected");
+    const userCollection = await db.collection('Authentication');
 
     return [db, userCollection];
 
