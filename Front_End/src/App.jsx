@@ -1,4 +1,5 @@
 import React from 'react'
+// import Blinds from './background/blinds';
 import Entry from './entrypage/entry';
 import Homepage from './entrypage/homepage';
 import About from './entrypage/renabout';
@@ -16,6 +17,8 @@ import SchedulePage from './entrypage/renschedule';
 function App() 
 {
   return (<>
+
+<div>
   <Routes> 
   <Route path="/" element={<Entry/>} />
   <Route path="/homepage" element={<Homepage/>}/>
@@ -29,10 +32,8 @@ function App()
     <Route path='/location' element={<Location/>}/>
  <Route path='/careers' element={<Careers/>}/>
   </Routes>
-  <ToastContainer 
-  
-  
-  />
+  <ToastContainer/>
+  </div>
       </>);
 }
 

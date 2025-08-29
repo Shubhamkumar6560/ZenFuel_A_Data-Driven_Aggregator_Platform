@@ -2,8 +2,10 @@ import React, { useEffect,useState  } from 'react';
 import Login from '../userAuthentication/login';
 import { Link } from 'react-router-dom';
 
+import { useGoogleAuth } from '../userAuthentication/googleAuth';
 function navbar() {
 
+  const {user,logout} = useGoogleAuth();
   const [sticky,setSticky]=useState(false);
   const [showModal,setShowModal]=useState(false);
   
@@ -55,7 +57,9 @@ function navbar() {
         tabIndex={0}
         className="menu menu-sm dropdown-content bg-base-100 rounded-box z-[1] mt-3 w-52 p-2 shadow text-white">
         <li><a>Login</a></li>
-        <li><a href='/homepage'>Homepage</a></li>
+        <li>
+        <a href='/homepage'>Homepage</a>
+        </li>
         <li><a>Portfolio</a></li>
         <Link to='/about'>
                 <li><a>About</a></li>
@@ -106,15 +110,33 @@ function navbar() {
   </svg>
 </label>
 <div>
+  
     <div className="dropdown dropdown-end">
-      <button htabIndex={0} onClick={()=>setShowModal((true))} role="button" className="btn btn-ghost hover:bg-white hover:text-slate-950 border-slate-50
+      {!user && (
+        <>
+              <button tabIndex={0} onClick={()=>setShowModal((true))} role="button" className="btn btn-ghost hover:bg-white hover:text-slate-950 border-slate-50
       "> SignUp
 </button>
+     </> )}
+
+
+
+     {user && (
+        <button
+          tabIndex={0}
+          onClick={logout}
+          role="button"
+          className="btn btn-ghost hover:bg-white hover:text-slate-950 border-slate-50"
+        >
+          Logout
+        </button>
+      )}
     </div>
+
+
   </div>
 </div>
 </div>
-
 {showModal && <Login onClose={()=>setShowModal(false)}/>}
 </div>
 

@@ -8,15 +8,31 @@ import axios from 'axios';
 import { toast } from 'react-toastify';
 import { useNavigate } from 'react-router-dom';
 
+import { useGoogleAuth } from '../userAuthentication/googleAuth';
+
+// import { useGoogleLogin } from '@react-oauth/google';
+// import { jwtDecode } from 'jwt-decode';
+
 function login({onClose}) {
+
+  const{ googleLogin } =useGoogleAuth();
 
   const[isLogin,setIsLogin]=useState(true);
   const[userEmail,setUserEmail]=useState("");
   const[userPassword,setUserPassword]=useState("");
   const[password,setconfirmPassword]=useState("");
 
+const handleGoogleLogin = async () => {
+    try {
+      await googleLogin(); 
 
-  const[showpassword,setshowpassword]=useState(false);
+      if (onClose) onClose();
+      useNavigate('/homepage');
+    } catch (err) {
+      console.error("Google login failed", err);
+    }
+  };
+  // const[showpassword,setshowpassword]=useState(false);
   const[showcpassword,setshowcpassword]=useState(false);
 
     const navigate = useNavigate();
@@ -131,6 +147,7 @@ function login({onClose}) {
     }
   }
   };
+
   return (
     <div className='h-screen inset-0 backdrop-blur-lg flex justify-center items-center text-black relative'>
   <div className='flex flex-col text-black relative'>
@@ -219,12 +236,14 @@ type='button' onClick={()=>setshowpassword(!showpassword)}>
 
         <a className='underline text-right '>Forgot Password !!</a>
 
-        <div class="flex w-full flex-col">
+        <div className="flex w-full flex-col">
 
-        <div class="divider divider-success">Or</div>
+        <div className="divider divider-success">Or</div>
         </div>
 
-        <button className="flex items-center gap-2 px-4 py-4 bg-white border text-center border-gray-300 rounded-md shadow-md hover:shadow-lg hover:bg-gray-100 transition-all duration-150">
+        <button
+        onClick={handleGoogleLogin}
+        className="flex items-center gap-2 px-4 py-4 bg-white border text-center border-gray-300 rounded-md shadow-md hover:shadow-lg hover:bg-gray-100 transition-all duration-150">
         <img
         src={google}
         alt="Google Logo"

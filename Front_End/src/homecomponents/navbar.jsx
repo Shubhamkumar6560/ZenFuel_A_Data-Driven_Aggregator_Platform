@@ -1,10 +1,12 @@
 import React, { useEffect,useState  } from 'react';
-
+import { useGoogleAuth } from '../userAuthentication/googleAuth';
 
 import { Link } from 'react-router-dom';
-function navbar({userData}) {
+function navbar() {
   const [sticky,setSticky]=useState(false);
   const [isOpen, setIsOpen] = useState(false);
+
+const {logout} =useGoogleAuth();
 
   const toggleMenu = () => {
     setIsOpen(!isOpen);
@@ -26,12 +28,7 @@ function navbar({userData}) {
     window.removeEventListener('scroll',handleScroll)
   }
 
-
-
-
-},)
-
-
+});
 
   return (
     <>
@@ -66,7 +63,7 @@ function navbar({userData}) {
         <Link to='/homepage'>
         <li><a >Homepage</a></li>
         </Link>
-        <li><a href="">Portfolio</a></li>
+        <li><a href="https://darkdev-sk.netlify.app/">Portfolio</a></li>
         <Link to='/about'>
         <li><a>About</a></li>
         </Link>
@@ -126,15 +123,15 @@ function navbar({userData}) {
       <ul
         tabIndex={0}
         className="menu menu-sm dropdown-content bg-base-100 rounded-box z-[1] mt-3 w-52 p-2 shadow text-white">
-        <li>
-          <Link className="justify-between" to='/profile'>
-            Profile
-            <span className="badge text-white">New</span>
-          </Link>
-        </li>
+       <li>
+    <Link className="justify-between" to='/profile'>
+      Profile
+      <span className="badge text-white">New</span>
+    </Link>
+  </li>
         <li><a>Settings</a></li>
         <Link to="/">
-        <li><a>Logout</a></li>
+        <li><a onClick={logout}>Logout</a></li>
         </Link>
       </ul>
     </div>

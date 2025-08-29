@@ -1,6 +1,6 @@
 import React from 'react'
 function cards({ item }) {
-  console.log(item);
+  // console.log(item);
 
 if (!item) {
   return null;
@@ -22,8 +22,8 @@ if (!item) {
     </h2>
     <p>{item.title}</p>
     <div className="card-actions justify-between">
-    <div class="badge badge-outline hover:bg-yellow-400 hover:text-black">{item.price}$</div>
-    <div class="cursor-pointer py-1 px-2 hover:bg-blue-700 rounded-full border-[2px] hover:text-black ">Buy Now</div>
+    <div className="badge badge-outline hover:bg-yellow-400 hover:text-black">{item.price}$</div>
+    <div className="cursor-pointer py-1 px-2 hover:bg-blue-700 rounded-full border-[2px] hover:text-black ">Buy Now</div>
     </div>
   </div>
 </div>
