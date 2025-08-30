@@ -15,27 +15,32 @@ import { useGoogleAuth } from '../userAuthentication/googleAuth';
 
 function login({onClose}) {
 
-  const{ googleLogin } =useGoogleAuth();
+  const{ googleLogin ,googleRegister } =useGoogleAuth();
 
   const[isLogin,setIsLogin]=useState(true);
   const[userEmail,setUserEmail]=useState("");
   const[userPassword,setUserPassword]=useState("");
   const[password,setconfirmPassword]=useState("");
 
-const handleGoogleLogin = async () => {
+  const navi = useNavigate();
+
+const handleGoogleAuth = async () => {
     try {
-      await googleLogin(); 
+      if (isLogin) {
+        await googleLogin();
+      } else {
+        await googleRegister();
+        onClose();
+      }
 
       if (onClose) onClose();
-      useNavigate('/homepage');
+      navigate("/homepage");
     } catch (err) {
-      console.error("Google login failed", err);
+      console.error("Google auth failed", err);
     }
   };
   // const[showpassword,setshowpassword]=useState(false);
   const[showcpassword,setshowcpassword]=useState(false);
-
-    const navigate = useNavigate();
 
   const toggleForm=()=>
   {
@@ -95,7 +100,7 @@ const handleGoogleLogin = async () => {
         if(response.status == 200)
         {
           toast.success(response.data.message,{position:'top-center',autoClose:2000,theme:"dark"})
-          navigate('/homepage');
+          navi('/homepage');
         }
 
       }
@@ -129,6 +134,7 @@ const handleGoogleLogin = async () => {
       if(res.status == 200)
       {
         toast.success(res.data.message,{position:'top-center',autoClose:2000,theme:"dark"});
+  
         setUserEmail("");
         setUserPassword("");
         setconfirmPassword("");
@@ -203,10 +209,6 @@ const handleGoogleLogin = async () => {
   </svg>
   <input value={userPassword} onChange={(e) => setUserPassword(e.target.value)} 
   type= "password" className="flex-grow  bg-white outline-none" placeholder="Password" required/>
-{/* <button
-type='button' onClick={()=>setshowpassword(!showpassword)}>
-  {showpassword ? <EyeOff/>:<Eye/>}
-</button> */}
 </label>
 
 {!isLogin && (
@@ -242,7 +244,7 @@ type='button' onClick={()=>setshowpassword(!showpassword)}>
         </div>
 
         <button
-        onClick={handleGoogleLogin}
+        onClick={handleGoogleAuth}
         className="flex items-center gap-2 px-4 py-4 bg-white border text-center border-gray-300 rounded-md shadow-md hover:shadow-lg hover:bg-gray-100 transition-all duration-150">
         <img
         src={google}

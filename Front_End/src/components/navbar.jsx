@@ -56,11 +56,8 @@ function navbar() {
       <ul
         tabIndex={0}
         className="menu menu-sm dropdown-content bg-base-100 rounded-box z-[1] mt-3 w-52 p-2 shadow text-white">
-        <li><a>Login</a></li>
-        <li>
-        <a href='/homepage'>Homepage</a>
-        </li>
-        <li><a>Portfolio</a></li>
+        <li><a href='/'>Login</a></li>
+        <li><a href='https://darkdev-sk.netlify.app/'>Portfolio</a></li>
         <Link to='/about'>
                 <li><a>About</a></li>
                 </Link>

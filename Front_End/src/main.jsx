@@ -10,11 +10,11 @@ import { GoogleAuthProvider } from './userAuthentication/googleAuth.jsx';
 const clientid ='39386575910-jdcq63cqv277urttmpqv32g5vp42sfee.apps.googleusercontent.com'; 
 createRoot(document.getElementById('root')).render(
 <GoogleOAuthProvider clientId={clientid}>
+    <BrowserRouter>
     <GoogleAuthProvider>
-<BrowserRouter>
 <App />
-</BrowserRouter>
 </GoogleAuthProvider>
+</BrowserRouter>
 </GoogleOAuthProvider>
 
  
