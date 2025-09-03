@@ -1,9 +1,59 @@
 const express = require('express');
+const jwt = require('jsonwebtoken');
+const bcrypt = require('bcrypt');
+const cookieParser = require('cookie-parser');
 const router = express.Router();
 const dbConnect = require('./mongodb'); 
 const axios = require("axios");
 
+require("dotenv").config();
+
+const JWT_TOKEN = process.env.JWT_TOKEN;
+const JWT_REFRESH_TOKEN = process.env.JWT_REFRESH_TOKEN;
+
+const generateToken = (user) =>
+{
+  const accessToken = jwt.sign(
+    {
+      id:user._id,
+      email:user.email,
+    },
+    JWT_TOKEN,
+    {expiresIn:"15m"}
+  )
+
+const refreshToken = jwt.sign(
+  {
+    id: user._id,
+    email: user.email,
+  },
+  JWT_REFRESH_TOKEN,
+  {expiresIn:"7d"}
+);
+
+return {accessToken ,refreshToken}
+};
+
+router.use(cookieParser());
+
+// Securing Routes =================================
+
+const authenticate =(req , res ,next) =>
+{
+  const token = req.cookies.accessToken;
+  if (!token) return res.status(401).json({ message: "Unauthorized" });
+
+  jwt.verify(token,JWT_TOKEN,(err,decode)=>
+  {
+    if(err) return res.status(403).json({ message: "Invalid or expired token" });
+    req.user = decode;
+    next();
+  });
+};
+
+
 // ================== REGISTER API ==================
+
 router.post('/register', async (req, res) => {
   try {
     console.log("Register request body:", req.body);
@@ -11,14 +61,13 @@ router.post('/register', async (req, res) => {
 
     const { email, password } = req.body;
 
-    // Check if email already exists
     const existingUser = await userCollection.findOne({ email });
 
     if (existingUser) {
       return res.status(400).json({ message: "Email already exists" });
     }
-
-    const result = await userCollection.insertOne({ email, password });
+    const hashedPassword = await bcrypt.hash(password,10);
+    const result = await userCollection.insertOne({ email, password:hashedPassword });
     console.log("User registered:", result);
 
     res.status(200).json({ message: "User registered successfully", data: result });
@@ -31,6 +80,7 @@ router.post('/register', async (req, res) => {
 });
 
 // ================== LOGIN API ==================
+
 router.post('/login', async (req, res) => {
   try {
     console.log("Login request body:", req.body);
@@ -40,12 +90,26 @@ router.post('/login', async (req, res) => {
     const user = await userCollection.findOne({ email });
 
     if (!user) {
-      return res.status(400).json({ message: "Invalid Credentials" });
+      return res.status(400).json({ message: "User Not Found" });
     }
-
-    if (user.password !== password) {
+    const isMatch = await bcrypt.compare(password,user.password);
+    if (!isMatch) {
       return res.status(401).json({ message: "Incorrect Password" });
     }
+
+     const { accessToken, refreshToken } = generateToken(user);
+     res.cookie("accessToken", accessToken, {
+      httpOnly: true,
+      secure: false,
+      sameSite: "strict",
+    });
+    res.cookie("refreshToken", refreshToken, {
+      httpOnly: true,
+      secure: false,
+      sameSite: "strict",
+    });
+
+
 
     console.log("Email and Password are successfully validated");
 
@@ -86,6 +150,19 @@ router.post('/google_login', async (req, res) => {
       });
     }
 
+    const { accessToken, refreshToken } = generateToken(user);
+
+    res.cookie("accessToken", accessToken, {
+      httpOnly: true,
+      secure: false,
+      sameSite: "strict",
+    });
+    res.cookie("refreshToken", refreshToken, {
+      httpOnly: true,
+      secure: false,
+      sameSite: "strict",
+    });
+
     res.status(200).json({
       message: `Welcome back, ${user.name}!`,
       user: {
@@ -105,6 +182,7 @@ router.post('/google_login', async (req, res) => {
 
 
 // ==============GOOGLE REGISTER API ====================
+
 router.post('/google_register', async (req, res) => {
   try {
     const { token } = req.body;
@@ -141,6 +219,20 @@ router.post('/google_register', async (req, res) => {
 
     const insertResult = await userCollection.insertOne(newUser);
     user = await userCollection.findOne({ _id: insertResult.insertedId });
+
+
+    const { accessToken, refreshToken } = generateToken(user);
+
+    res.cookie("accessToken", accessToken, {
+      httpOnly: true,
+      secure: false,
+      sameSite: "strict",
+    });
+    res.cookie("refreshToken", refreshToken, {
+      httpOnly: true,
+      secure: false,
+      sameSite: "strict",
+    });
 
     res.status(201).json({
       message: `${user.name} successfully registered`,

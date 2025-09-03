@@ -1,8 +1,15 @@
 
 const { MongoClient } = require('mongodb');
+require("dotenv").config();
+
 async function dbConnect() {
   try {
-    const client = await MongoClient.connect('mongodb://localhost:27017/');
+    const client = await MongoClient.connect(process.env.MONGO_URI,
+      {
+        useNewUrlParser: true,
+        useUnifiedTopology: true
+      }
+    );
     const db = client.db('ZenFuel');
     const userCollection = await db.collection('Authentication');
 

@@ -6,7 +6,7 @@ function Navbar() {
   const [sticky, setSticky] = useState(false);
   const [isOpen, setIsOpen] = useState(false);
 
-  const { user, logout } = useGoogleAuth(); // ✅ Get logged in user from context
+  const { user, logout } = useGoogleAuth();
 
   const toggleMenu = () => {
     setIsOpen(!isOpen);
